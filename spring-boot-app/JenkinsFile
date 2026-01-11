@@ -15,7 +15,8 @@ pipeline{
     stage("Build and Test"){
       steps{
         // spring-boot-pipeline is the pipeline jenkins job name here
-        sh 'cd spring-boot-pipeline/spring-boot-app && mvn clean package' 
+        // Jenkins already clones the repo into workspace/spring-boot-pipeline
+        sh 'cd spring-boot-app && mvn clean package' 
       }
     }
 
