@@ -27,6 +27,22 @@ pipeline{
         }
       }
     }
-  
+   stage("Build and Push Docker Image to DockerHub"){
+      steps{
+        scrips{
+          withCredentials([usernameColonPassword(credentialsId: 'dockerhub_cred', variable: 'dockerhub_auth')]) {
+          sh '''
+            docker image build -t $JOB_NAME:v1.$BUILD_ID .
+            docker image tag $JOB_NAME:v1.$BUILD_ID pranav20003/$JOB_NAME:v1.$BUILD_ID
+            docker image tag $JOB_NAME:v1.$BUILD_ID pranav20003/$JOB_NAME:latest
+
+            docker login -u pranav20003 -p ${dockerhub_auth}
+            docker image push pranav20003/$JOB_NAME:v1.$BUILD_ID
+            docker image push pranav20003/$JOB_NAME:latest
+          '''
+          }
+        }
+      }
+    }
   }
 }
