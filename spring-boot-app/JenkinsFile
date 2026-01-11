@@ -30,7 +30,7 @@ pipeline{
    stage("Build and Push Docker Image to DockerHub"){
       steps{
         script{
-          withCredentials([usernameColonPassword(credentialsId: 'dockerhub_cred', variable: 'dockerhub_auth')]) {
+          withCredentials([string(credentialsId: 'dockerhub_cred', variable: 'dockerhub_auth')]) {
           sh '''
             docker image build -t $JOB_NAME:v1.$BUILD_ID spring-boot-app
             docker image tag $JOB_NAME:v1.$BUILD_ID pranav20003/$JOB_NAME:v1.$BUILD_ID
