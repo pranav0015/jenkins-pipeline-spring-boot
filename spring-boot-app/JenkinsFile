@@ -23,7 +23,7 @@ pipeline{
     stage("Static Code Analysis"){
       steps{
         withSonarQubeEnv('sonarqube-server') {
-          sh 'mvn clean verify sonar:sonar'
+          sh 'cd spring-boot-app && mvn clean verify sonar:sonar'
         }
       }
     }
