@@ -14,7 +14,7 @@ pipeline{
 
     stage("Build and Test"){
       steps{
-        sh 'cd /jenkins-pipeline-spring-boot/spring-boot-app/JenkinsFile && mvn clean package'
+        sh 'cd /jenkins-pipeline-spring-boot/spring-boot-app && mvn clean package'
       }
     }
 
