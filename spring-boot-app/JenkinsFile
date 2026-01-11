@@ -49,5 +49,24 @@ pipeline{
         }
       }
     }
+  stage("Update Deployment File"){
+      environment{
+        GIT_REPO_NAME = "jenkins-pipeline-spring-boot"
+        GIT_USER_NAME = "pranav0015"
+      }
+      steps{
+        git config user.email "pranavwakte580@gmail.com"
+        git config user.name "pranav0015"
+
+        BUILD_NUMBER = ${BUILD_NUMBER}
+        sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" jenkins-pipeline-spring-boot/spring-boot-app-manifests/deployment.yml
+
+        git add jenkins-pipeline-spring-boot/spring-boot-app-manifests/deployment.yml
+        git commit -m "Update the deployment image to version ${BUILD_NUMBER}"
+        git push https://${github_token}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
+
+
+      }
+    }
   }
 }
