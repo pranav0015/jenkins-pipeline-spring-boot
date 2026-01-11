@@ -14,7 +14,8 @@ pipeline{
 
     stage("Build and Test"){
       steps{
-        sh 'cd jenkins-pipeline-spring-boot/spring-boot-app && mvn clean package'
+        // spring-boot-pipeline is the pipeline jenkins job name here
+        sh 'cd spring-boot-pipeline/spring-boot-app && mvn clean package' 
       }
     }
 
