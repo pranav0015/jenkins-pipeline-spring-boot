@@ -36,7 +36,7 @@ pipeline{
             docker image tag $JOB_NAME:v1.$BUILD_ID pranav20003/$JOB_NAME:v1.$BUILD_ID
             docker image tag $JOB_NAME:v1.$BUILD_ID pranav20003/$JOB_NAME:latest
 
-            docker login -u pranav20003 -p ${dockerhub_auth}
+            echo ${dockerhub_auth} | docker login -u pranav20003 --password-stdin
             docker image push pranav20003/$JOB_NAME:v1.$BUILD_ID
             docker image push pranav20003/$JOB_NAME:latest
           '''
