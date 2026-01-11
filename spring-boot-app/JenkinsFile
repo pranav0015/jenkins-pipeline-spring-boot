@@ -29,7 +29,7 @@ pipeline{
     }
    stage("Build and Push Docker Image to DockerHub"){
       steps{
-        scrips{
+        scritps{
           withCredentials([usernameColonPassword(credentialsId: 'dockerhub_cred', variable: 'dockerhub_auth')]) {
           sh '''
             docker image build -t $JOB_NAME:v1.$BUILD_ID .
